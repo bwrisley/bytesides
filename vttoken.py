@@ -62,14 +62,20 @@ class VirusTotal:
             return False
 
 if __name__ == '__main__':
+
+    try:
+        filehash = sys.argv[1]
+    except:
+        sys.exit("Ops! Please add the hash as argument.")
+
     if not APIKEY:
         sys.exit("Ops! You forgot to fill the APIKEY variable.")
 
     try:
-        sample = VirusTotal(sys.argv[1])
+        sample = VirusTotal(filehash)
         tags = sample.fetch()
 
         for tag in tags:
-            print '%s,%s' % (sys.argv[1],tag)
+            print '%s,%s' % (filehash,tag)
     except:
         pass
